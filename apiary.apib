@@ -1,80 +1,44 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: https://invacaretest-a493523.integration.us2.oraclecloud.com/integration/flowapi/rest/ADD_CUSTOMER_DATA/v01
 
-# OCI USE CASES
+# User Data Insertion into OIC API
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+User Data Insertion into OIC API is a **REST** API that processes a **POST** request to the REST endpoint which performs operation and inserts data into the database.
 
-## Questions Collection [/questions]
+## Operations [/new_customer_data]
 
-### List All Questions [GET]
+### Insert Operation [POST]
 
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+Inserts data into database using Oracle Integration Cloud Service
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+          "CustomerInfo": 
+          {
+                "CustomerNumber": "12345678",
+                "CustomerID": "JMK123",
+                "CustomerName": "Jaimik Bhatt",
+                "Address": 
+                {
+                      "Address1": "3515 SW 39 BLvd",
+                      "Address2": "Archer Rd",
+                      "City": "Gainesville",
+                      "ZipCode": "32608",
+                      "State": "FL"
+                },
+            "OrgID": "Lab64"
+          }
         }
 
 + Response 201 (application/json)
 
     + Headers
-
-            Location: /questions/2
-
+    
+            Authorization: Basic
+    
     + Body
-
+    
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
+              "StatusMsg": "'Success!'"
             }
